@@ -91,7 +91,7 @@ namespace MonoGameNetworking.GameItself
             if (tics > 200)
             {
                 tics = 0;
-                score-=3;
+                score-=5;
                 targetx = rand.Next(400) + 50;
                 targety = rand.Next(400) + 50;
             }

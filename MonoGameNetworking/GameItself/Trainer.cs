@@ -19,26 +19,28 @@ namespace MonoGameNetworking.GameItself
 
         public static BasicNetwork train(Render render)
         {
-            BasicNetwork network = CreateNetwork(6, 2, 10);
+            BasicNetwork network = CreateNetwork(6, 2, 8);
 
             IMLTrain train;
 
             train = new MLMethodGeneticAlgorithm(() =>
             {
 
-                BasicNetwork result = CreateNetwork(6, 2, 10);
+                BasicNetwork result = CreateNetwork(6, 2, 8);
                 ((IMLResettable)result).Reset();
                 return result;
 
-            }, new Tester(), 1000);
+            }, new Tester(), 2000);
 
             int epoch = 1;
 
-            for (int i = 0; i < 90; i++)
+            for (int i = 0; i < 80; i++)
             {
                 train.Iteration();
                 Console.WriteLine(@"Epoch #" + epoch + @" Score:" + train.Error);
                 epoch++;
+                if (train.Error >= 37)
+                    break;
             }
             
             return (BasicNetwork)train.Method;
